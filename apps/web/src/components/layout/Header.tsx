@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Moon, Menu, X } from "lucide-react";
+import { Moon, Menu, X, Bell, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 const NAV_LINKS = [
@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: "专题合集", href: "/collections" },
   { label: "排行榜", href: "/rankings" },
   { label: "投稿", href: "/submit" },
+  { label: "个人中心", href: "/profile" },
   { label: "关于", href: "/about" },
 ];
 
@@ -61,24 +62,26 @@ export default function Header() {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
-          <button
-            className="p-2 rounded-lg text-slate-400 hover:text-white transition-colors"
-            aria-label="切换主题"
-          >
+          <button className="p-2 rounded-lg text-slate-400 hover:text-white transition-colors" aria-label="切换主题">
             <Moon size={18} />
           </button>
-          <Link
-            href="/login"
-            className="hidden md:block px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white border border-indigo-500/30 hover:border-indigo-500/60 transition-all"
-          >
+          {/* Bell with badge */}
+          <button className="hidden md:flex relative p-2 rounded-lg text-slate-400 hover:text-white transition-colors">
+            <Bell size={18} />
+            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500" />
+          </button>
+          <Link href="/login" className="hidden md:block px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white border border-indigo-500/30 hover:border-indigo-500/60 transition-all">
             登录
           </Link>
-          <Link
-            href="/register"
-            className="hidden md:block btn-primary px-4 py-2 rounded-lg text-sm text-white font-medium"
-          >
+          <Link href="/register" className="hidden md:block btn-primary px-4 py-2 rounded-lg text-sm text-white font-medium">
             注册
           </Link>
+          {/* User avatar (shown when logged in — static demo) */}
+          <div className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded-lg cursor-pointer hover:bg-white/5 transition-colors">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center text-sm" style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)" }}>👨‍🚀</div>
+            <span className="text-sm text-slate-300">星海漫游者</span>
+            <ChevronDown size={13} className="text-slate-500" />
+          </div>
           <button
             className="md:hidden p-2 text-slate-400 hover:text-white"
             onClick={() => setMobileOpen(!mobileOpen)}
