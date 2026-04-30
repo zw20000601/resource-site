@@ -3,10 +3,11 @@
 import { Search, Bell, Globe, Sun, ChevronDown, Command } from "lucide-react";
 
 interface AdminHeaderProps {
-  breadcrumb: string[];
+  breadcrumb: string | string[];
 }
 
 export default function AdminHeader({ breadcrumb }: AdminHeaderProps) {
+  const crumbs = Array.isArray(breadcrumb) ? breadcrumb : [breadcrumb];
   return (
     <header
       className="h-14 flex items-center px-5 gap-4 flex-shrink-0"
@@ -15,10 +16,10 @@ export default function AdminHeader({ breadcrumb }: AdminHeaderProps) {
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-slate-400 flex-shrink-0">
         <span>后台</span>
-        {breadcrumb.map((crumb, i) => (
+        {crumbs.map((crumb, i) => (
           <span key={i} className="flex items-center gap-2">
             <span className="text-slate-600">/</span>
-            <span className={i === breadcrumb.length - 1 ? "text-white font-medium" : "text-slate-400"}>{crumb}</span>
+            <span className={i === crumbs.length - 1 ? "text-white font-medium" : "text-slate-400"}>{crumb}</span>
           </span>
         ))}
       </div>
